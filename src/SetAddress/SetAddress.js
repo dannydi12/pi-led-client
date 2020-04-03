@@ -15,13 +15,17 @@ function SetAddress(props) {
   }
 
   return (
-    <form onSubmit={(e) => storeAddress(e)}>
-      <input onChange={(e) => setServer(e.target.value)} value={server} type='text' id='address' />
-      <div className='button-wrapper'>
-        {addressIsSet() && <button onClick={props.toggleAddressModal} type='button'>Cancel</button>}
-        <button type='submit'>Submit</button>
-      </div>
-    </form>
+    <div className='set-address'>
+      <form onSubmit={(e) => storeAddress(e)}>
+        <p>Hey there, just before the fun begins, please enter the server IP or domain name.</p>
+        <label htmlFor='address'>Address</label>
+        <input onChange={(e) => setServer(e.target.value)} value={server} type='text' id='address' />
+        <div className='button-wrapper'>
+          {addressIsSet() && <button onClick={props.toggleAddressModal} type='button'>Cancel</button>}
+          <button type='submit'>Submit</button>
+        </div>
+      </form>
+    </div>
   );
 }
 
