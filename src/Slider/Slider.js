@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './Slider.css';
 
 function Slider(props) {
@@ -23,6 +24,14 @@ function Slider(props) {
       id={props.settingName}
       aria-label={props.settingName} />
   );
+}
+
+Slider.propTypes = {
+  min: PropTypes.number.isRequired,
+  max: PropTypes.number.isRequired,
+  defaultValue: PropTypes.number.isRequired,
+  settingName: PropTypes.string.isRequired,
+  handler: PropTypes.func.isRequired
 }
 
 export default Slider;
