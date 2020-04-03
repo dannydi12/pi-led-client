@@ -3,3 +3,28 @@ main {
   flex-direction: column;
   align-items: center;
 }
+
+#controller {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  text-align: center;
+}
+
+#routines {
+  margin-top: 20px;
+}
+
+.slider {
+  display: block;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 250px;
+}

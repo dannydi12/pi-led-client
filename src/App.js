@@ -88,7 +88,7 @@ class App extends React.Component {
   render() {
     return (
       <main>
-        <form onSubmit={(e) => {
+        <form id='controller' onSubmit={(e) => {
           e.preventDefault();
           setRoutine(this.state.routineSettings)
         }}>
@@ -116,8 +116,10 @@ class App extends React.Component {
               }
             </div>
           }
-          <button type='submit'>Start</button>
-          <button type='button' onClick={stopRoutine}>Stop</button>
+          <div className='button-wrapper'>
+            <button type='button' onClick={stopRoutine}>Stop</button>
+            <button type='submit'>Start</button>
+          </div>
         </form>
         {this.state.showAddressModal && <SetAddress toggleAddressModal={this.toggleAddressModal} populateRoutines={this.populateRoutines} />}
       </main>
