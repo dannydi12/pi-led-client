@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { setAddress, getAddress, addressIsSet } from '../services/local-storage-service';
+import PropTypes from 'prop-types';
 import './SetAddress.css'
 
 function SetAddress(props) {
@@ -27,6 +28,11 @@ function SetAddress(props) {
       </form>
     </div>
   );
+}
+
+SetAddress.propTypes = {
+  toggleAddressModal: PropTypes.func.isRequired,
+  populateRoutines: PropTypes.func.isRequired
 }
 
 export default SetAddress;
