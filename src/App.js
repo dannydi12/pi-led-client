@@ -102,17 +102,34 @@ class App extends React.Component {
             <SketchPicker
               color={this.state.routineSettings.color}
               onChangeComplete={this.handleColorChange}
+              aria-label='color'
             />
           }
           {this.state.allRoutines.length > 1 &&
             <div className='slider-container'>
               {
                 this.getCurrentRoutine().customOptions.find(option => option === 'delay') &&
-                <input type="range" min="1" max="1000" defaultValue={1000} onChange={(e) => this.handleSettingChange('delay', e.target.value)} className="slider" id="delay" />
+                <input 
+                type='range'
+                min='1'
+                max='1000' 
+                defaultValue={1000} 
+                onChange={(e) => this.handleSettingChange('delay', e.target.value)} 
+                className='slider' 
+                id='delay'
+                aria-label='delay' />
               }
               {
                 this.getCurrentRoutine().customOptions.find(option => option === 'brightness') &&
-                <input type="range" min="1" max="255" defaultValue={200} onChange={(e) => this.handleSettingChange('brightness', e.target.value)} className="slider" id="brightness" />
+                <input 
+                type='range'
+                min='1'
+                max='255'
+                defaultValue={200} 
+                onChange={(e) => this.handleSettingChange('brightness', e.target.value)} 
+                className='slider'
+                id="brightness" 
+                aria-label='brightness' />
               }
             </div>
           }
@@ -122,7 +139,7 @@ class App extends React.Component {
           </div>
         </form>
         {this.state.showAddressModal && <SetAddress toggleAddressModal={this.toggleAddressModal} populateRoutines={this.populateRoutines} />}
-        {!this.state.showAddressModal && <button className='settings-button' onClick={this.toggleAddressModal}></button>}
+        {!this.state.showAddressModal && <button className='settings-button' onClick={this.toggleAddressModal} aria-label='settings'></button>}
       </main>
     );
   }

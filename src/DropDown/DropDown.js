@@ -8,7 +8,7 @@ function DropDown(props) {
   })
 
   return (
-    <select id="routines" onChange={(e) =>  props.changeName(e.target.value)}>
+    <select id="routines" aria-label='set a routine' onChange={(e) =>  props.changeName(e.target.value)}>
       {options}
     </select>
   );
