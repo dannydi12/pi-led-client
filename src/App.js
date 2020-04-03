@@ -5,6 +5,7 @@ import { getRoutines, setRoutine, stopRoutine } from './services/api-service';
 import { addressIsSet } from './services/local-storage-service';
 import SetAddress from './SetAddress/SetAddress';
 import './App.css';
+import Slider from './Slider/Slider';
 
 class App extends React.Component {
 
@@ -60,7 +61,7 @@ class App extends React.Component {
         delay: null,
         routineName: newName
       }
-    })
+    }, () => setRoutine(this.state.routineSettings))
   }
 
   handleColorChange = (color, event) => {
@@ -82,7 +83,7 @@ class App extends React.Component {
         ...this.state.routineSettings,
         [setting]: value,
       }
-    })
+    }, () => setRoutine(this.state.routineSettings))
   }
 
   render() {
@@ -109,27 +110,21 @@ class App extends React.Component {
               <div className='slider-container'>
                 {
                   this.getCurrentRoutine().customOptions.find(option => option === 'delay') &&
-                  <input
-                    type='range'
-                    min='1'
-                    max='1000'
+                  <Slider
+                    min={1}
+                    max={1000}
                     defaultValue={1000}
-                    onChange={(e) => this.handleSettingChange('delay', e.target.value)}
-                    className='slider'
-                    id='delay'
-                    aria-label='delay' />
+                    settingName={'delay'}
+                    handler={this.handleSettingChange} />
                 }
                 {
                   this.getCurrentRoutine().customOptions.find(option => option === 'brightness') &&
-                  <input
-                    type='range'
-                    min='1'
-                    max='255'
+                  <Slider
+                    min={1}
+                    max={255}
                     defaultValue={200}
-                    onChange={(e) => this.handleSettingChange('brightness', e.target.value)}
-                    className='slider'
-                    id="brightness"
-                    aria-label='brightness' />
+                    settingName={'brightness'}
+                    handler={this.handleSettingChange}/>
                 }
               </div>
             </>
