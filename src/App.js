@@ -2,8 +2,9 @@ import React from 'react';
 import { SketchPicker } from 'react-color';
 import DropDown from './DropDown/DropDown';
 import { getRoutines, setRoutine, stopRoutine } from './services/api-service';
-import { getAddress, addressIsSet } from './services/local-storage-service';
+import { addressIsSet } from './services/local-storage-service';
 import './App.css';
+import SetAddress from './SetAddress/SetAddress';
 
 class App extends React.Component {
 
@@ -24,14 +25,22 @@ class App extends React.Component {
 
   componentDidMount() {
     if (!addressIsSet()) {
-      this.setState({
-        showAddressModal: true
-      })
+      this.toggleAddressModal()
     }
 
     if (addressIsSet()) {
-      getRoutines(this.addRoutines)
+      this.populateRoutines()
     }
+  }
+
+  populateRoutines = () => {
+    getRoutines(this.addRoutines)
+  }
+
+  toggleAddressModal = () => {
+    this.setState({
+      showAddressModal: !this.state.showAddressModal
+    })
   }
 
   addRoutines = (allRoutines) => {
@@ -91,7 +100,10 @@ class App extends React.Component {
         <header>
           <h1>Light Control</h1>
         </header>
-        <form>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          setRoutine(this.state.routineSettings)
+        }}>
           <DropDown routines={this.state.allRoutines} changeName={this.changeName} />
           {
             this.state.allRoutines.length > 1 &&
@@ -112,14 +124,10 @@ class App extends React.Component {
             this.state.allRoutines.length > 1 && this.getCurrentRoutine().customOptions.find(option => option === 'brightness') &&
             <input type="range" min="1" max="255" defaultValue={200} onChange={(e) => this.handleBrightnessChange(e.target.value)} className="slider" id="brightness" />
           }
-          <button type='submit' onClick={(e) => {
-            e.preventDefault();
-            setRoutine(this.state.routineSettings)
-          }}>
-            Start
-          </button>
+          <button type='submit'>Start</button>
           <button type='button' onClick={stopRoutine}>Stop</button>
         </form>
+        {this.state.showAddressModal && <SetAddress toggleAddressModal={this.toggleAddressModal} populateRoutines={this.populateRoutines}/>}
       </main>
     );
   }
