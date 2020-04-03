@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { setAddress } from '../services/local-storage-service';
+import { setAddress, getAddress, addressIsSet } from '../services/local-storage-service';
 import './SetAddress.css'
 
 function SetAddress(props) {
 
-  const [server, setServer] = useState(null)
+  const [server, setServer] = useState(addressIsSet() ? getAddress() : 'https://somedomain.com:8000')
 
   const storeAddress = (e) => {
     e.preventDefault();
@@ -16,8 +16,11 @@ function SetAddress(props) {
 
   return (
     <form onSubmit={(e) => storeAddress(e)}>
-      <input onChange={(e) => setServer(e.target.value)} type='text' id='address' />
-      <button type='submit'>Submit</button>
+      <input onChange={(e) => setServer(e.target.value)} value={server} type='text' id='address' />
+      <div className='button-wrapper'>
+        {addressIsSet() && <button onClick={props.toggleAddressModal} type='button'>Cancel</button>}
+        <button type='submit'>Submit</button>
+      </div>
     </form>
   );
 }

@@ -122,6 +122,7 @@ class App extends React.Component {
           </div>
         </form>
         {this.state.showAddressModal && <SetAddress toggleAddressModal={this.toggleAddressModal} populateRoutines={this.populateRoutines} />}
+        <button className='settings-button' onClick={this.toggleAddressModal}>Settings</button>
       </main>
     );
   }
