@@ -51,10 +51,10 @@ class App extends React.Component {
   }
 
   handleColorChange = (color, event) => {
-    console.log('called')
     this.setState({
       routineSettings: {
         ...this.state.routineSettings,
+        delay: null,
         color: {
           r: color.rgb.r,
           g: color.rgb.g,
