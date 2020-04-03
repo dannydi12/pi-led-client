@@ -1,13 +1,13 @@
-export function setIP(ip) {
-  localStorage.setItem('ip', ip)
+export function setAddress(address) {
+  return localStorage.setItem('address', address)
 }
 
-export function getIP() {
-  localStorage.getItem('ip')
+export function getAddress() {
+  return localStorage.getItem('address')
 }
 
-export function ipIsSet() {
-  if(!setIP()) {
+export function addressIsSet() {
+  if(!getAddress()) {
     return false;
   }
   return true;
