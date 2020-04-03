@@ -7,8 +7,23 @@ import './App.css';
 
 class App extends React.Component {
 
+  state = {
+    showAddressModal: false,
+    allRoutines: [],
+    routineSettings: {
+      routineName: null,
+      color: {
+        r: 0,
+        g: 0,
+        b: 0,
+      },
+      delay: null,
+      brightness: null,
+    }
+  }
+
   componentDidMount() {
-    if (!addressIsSet) {
+    if (!addressIsSet()) {
       // trigger modal
     }
   }
