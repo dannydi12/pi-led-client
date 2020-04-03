@@ -1,4 +1,5 @@
 import React from 'react';
+import { SketchPicker } from 'react-color';
 import DropDown from './DropDown/DropDown';
 import Range from './Range/Range';
 import { getRoutines, setRoutine, stopRoutine } from './services/api-service';
@@ -13,9 +14,9 @@ class App extends React.Component {
     routineSettings: {
       routineName: null,
       color: {
-        r: 0,
-        g: 0,
-        b: 0,
+        r: 105,
+        g: 57,
+        b: 214,
       },
       delay: null,
       brightness: null,
@@ -29,7 +30,7 @@ class App extends React.Component {
       })
     }
 
-    if(addressIsSet()) {
+    if (addressIsSet()) {
       getRoutines(this.addRoutines)
     }
   }
@@ -40,6 +41,20 @@ class App extends React.Component {
     })
   }
 
+  handleColorChange = (color, event) => {
+    console.log('called')
+    this.setState({
+      routineSettings: {
+        ...this.state.routineSettings,
+        color: {
+          r: color.rgb.r,
+          g: color.rgb.g,
+          b: color.rgb.b
+        }
+      }
+    })
+  };
+
   render() {
     return (
       <main>
@@ -48,6 +63,10 @@ class App extends React.Component {
         </header>
 
         <form>
+          <SketchPicker
+            color={this.state.routineSettings.color}
+            onChangeComplete={this.handleColorChange}
+          />
           <DropDown />
           <Range />
         </form>
