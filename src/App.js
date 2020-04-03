@@ -37,12 +37,6 @@ class App extends React.Component {
     getRoutines(this.addRoutines)
   }
 
-  toggleAddressModal = () => {
-    this.setState({
-      showAddressModal: !this.state.showAddressModal
-    })
-  }
-
   addRoutines = (allRoutines) => {
     this.setState({
       allRoutines
@@ -51,6 +45,12 @@ class App extends React.Component {
 
   getCurrentRoutine = () => {
     return this.state.allRoutines.find(routine => routine.name === this.state.routineSettings.routineName)
+  }
+
+  toggleAddressModal = () => {
+    this.setState({
+      showAddressModal: !this.state.showAddressModal
+    })
   }
 
   changeName = (newName) => {
@@ -76,20 +76,11 @@ class App extends React.Component {
     })
   };
 
-  handleDelayChange = (delay) => {
+  handleSettingChange = (setting, value) => {
     this.setState({
       routineSettings: {
         ...this.state.routineSettings,
-        delay,
-      }
-    })
-  }
-
-  handleBrightnessChange = (brightness) => {
-    this.setState({
-      routineSettings: {
-        ...this.state.routineSettings,
-        brightness,
+        [setting]: value,
       }
     })
   }
@@ -118,11 +109,11 @@ class App extends React.Component {
           }
           {
             this.state.allRoutines.length > 1 && this.getCurrentRoutine().customOptions.find(option => option === 'delay') &&
-            <input type="range" min="1" max="5000" defaultValue={1000} onChange={(e) => this.handleDelayChange(e.target.value)} className="slider" id="delay" />
+            <input type="range" min="1" max="5000" defaultValue={1000} onChange={(e) => this.handleSettingChange('delay', e.target.value)} className="slider" id="delay" />
           }
           {
             this.state.allRoutines.length > 1 && this.getCurrentRoutine().customOptions.find(option => option === 'brightness') &&
-            <input type="range" min="1" max="255" defaultValue={200} onChange={(e) => this.handleBrightnessChange(e.target.value)} className="slider" id="brightness" />
+            <input type="range" min="1" max="255" defaultValue={200} onChange={(e) => this.handleSettingChange('brightness', e.target.value)} className="slider" id="brightness" />
           }
           <button type='submit'>Start</button>
           <button type='button' onClick={stopRoutine}>Stop</button>
