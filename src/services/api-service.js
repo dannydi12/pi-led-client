@@ -2,13 +2,13 @@ import { getAddress } from './local-storage-service';
 
 function objectToQueryString(obj) {
   const queries = Object.keys(obj).map(key => {
-    if (obj[key] !== null) {
+    if (obj[key] !== null && obj[key] !== undefined) {
       return key + '=' + obj[key]
     }
-    return '';
+    return null;
   });
 
-  return queries.join('&');
+  return queries.filter(query => query !== null).join('&');
 }
 
 export function getRoutines(addToState) {
@@ -32,7 +32,7 @@ export function getRoutines(addToState) {
 
 export function setRoutine(routine) {
   const settings = {
-    name: encodeURI(routine.name),
+    name: encodeURI(routine.routineName),
     colorType: 'rgb',
     r: routine.color.r,
     g: routine.color.g,
@@ -40,6 +40,8 @@ export function setRoutine(routine) {
     delay: routine.delay,
     brightness: routine.brightness
   }
+
+  console.log(objectToQueryString(settings))
 
   return fetch(`${getAddress()}/routines?${objectToQueryString(settings)}`, {
     method: 'PUT',

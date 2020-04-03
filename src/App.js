@@ -106,13 +106,19 @@ class App extends React.Component {
           }
           {
             this.state.allRoutines.length > 1 && this.getCurrentRoutine().customOptions.find(option => option === 'delay') &&
-            <input type="range" min="1" max="10000" defaultValue={1000} onChange={(e) => this.handleDelayChange(e.target.value)} className="slider" id="delay" />
+            <input type="range" min="1" max="5000" defaultValue={1000} onChange={(e) => this.handleDelayChange(e.target.value)} className="slider" id="delay" />
           }
           {
             this.state.allRoutines.length > 1 && this.getCurrentRoutine().customOptions.find(option => option === 'brightness') &&
             <input type="range" min="1" max="255" defaultValue={200} onChange={(e) => this.handleBrightnessChange(e.target.value)} className="slider" id="brightness" />
           }
-
+          <button type='submit' onClick={(e) => {
+            e.preventDefault();
+            setRoutine(this.state.routineSettings)
+          }}>
+            Start
+          </button>
+          <button type='button' onClick={stopRoutine}>Stop</button>
         </form>
       </main>
     );
