@@ -95,43 +95,44 @@ class App extends React.Component {
           <DropDown routines={this.state.allRoutines} changeName={this.changeName} />
           {
             this.state.allRoutines.length > 1 &&
-            <p>{this.getCurrentRoutine().description}</p>
-          }
-          {
-            this.state.allRoutines.length > 1 && this.getCurrentRoutine().customOptions.find(option => option === 'color') &&
-            <SketchPicker
-              color={this.state.routineSettings.color}
-              onChangeComplete={this.handleColorChange}
-              aria-label='color'
-            />
-          }
-          {this.state.allRoutines.length > 1 &&
-            <div className='slider-container'>
+            <>
+              <p>{this.getCurrentRoutine().description}</p>
               {
-                this.getCurrentRoutine().customOptions.find(option => option === 'delay') &&
-                <input 
-                type='range'
-                min='1'
-                max='1000' 
-                defaultValue={1000} 
-                onChange={(e) => this.handleSettingChange('delay', e.target.value)} 
-                className='slider' 
-                id='delay'
-                aria-label='delay' />
+                this.getCurrentRoutine().customOptions.find(option => option === 'color') &&
+                <SketchPicker
+                  color={this.state.routineSettings.color}
+                  onChangeComplete={this.handleColorChange}
+                  aria-label='color'
+                />
               }
-              {
-                this.getCurrentRoutine().customOptions.find(option => option === 'brightness') &&
-                <input 
-                type='range'
-                min='1'
-                max='255'
-                defaultValue={200} 
-                onChange={(e) => this.handleSettingChange('brightness', e.target.value)} 
-                className='slider'
-                id="brightness" 
-                aria-label='brightness' />
-              }
-            </div>
+
+              <div className='slider-container'>
+                {
+                  this.getCurrentRoutine().customOptions.find(option => option === 'delay') &&
+                  <input
+                    type='range'
+                    min='1'
+                    max='1000'
+                    defaultValue={1000}
+                    onChange={(e) => this.handleSettingChange('delay', e.target.value)}
+                    className='slider'
+                    id='delay'
+                    aria-label='delay' />
+                }
+                {
+                  this.getCurrentRoutine().customOptions.find(option => option === 'brightness') &&
+                  <input
+                    type='range'
+                    min='1'
+                    max='255'
+                    defaultValue={200}
+                    onChange={(e) => this.handleSettingChange('brightness', e.target.value)}
+                    className='slider'
+                    id="brightness"
+                    aria-label='brightness' />
+                }
+              </div>
+            </>
           }
           <div className='button-wrapper'>
             <button type='button' onClick={stopRoutine}>Stop</button>
