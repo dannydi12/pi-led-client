@@ -41,8 +41,6 @@ export function setRoutine(routine) {
     brightness: routine.brightness
   }
 
-  console.log(objectToQueryString(settings))
-
   return fetch(`${getAddress()}/routines?${objectToQueryString(settings)}`, {
     method: 'PUT',
     headers: {
