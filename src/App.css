@@ -20,6 +20,43 @@ main {
   display: block;
   margin-top: 30px;
   margin-bottom: 30px;
+  width: 70vw;
+  -webkit-appearance: none;
+  outline: none; 
+  appearance: none;
+  height: 15px;
+  background-color: rgb(71, 71, 71);
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 35px;
+  height: 35px;
+  background: #fff;
+  cursor: pointer;
+  border-radius: 15px;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 35px;
+  background: #fff;
+  cursor: pointer;
+}
+
+#delay::-webkit-slider-thumb {
+  background-image: url('/images/clock.png');
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#brightness::-webkit-slider-thumb {
+  background-image: url('/images/sun.png');
+  background-size: 25px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .button-wrapper {
