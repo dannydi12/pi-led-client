@@ -15,7 +15,7 @@ button {
   padding: 15px;
   border-radius: 50px;
   background-color: black;
-  border: 1px #fff solid;
+  border: 1px rgb(94, 94, 94) solid;
   color: #fff;
 }
 
