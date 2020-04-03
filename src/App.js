@@ -12,7 +12,7 @@ class App extends React.Component {
     showAddressModal: false,
     allRoutines: [],
     routineSettings: {
-      routineName: null,
+      routineName: 'Show Off',
       color: {
         r: 105,
         g: 57,
@@ -41,6 +41,15 @@ class App extends React.Component {
     })
   }
 
+  changeName = (newName) => {
+    this.setState({
+      routineSettings: {
+        ...this.state.routineSettings,
+        routineName: newName
+      }
+    })
+  }
+
   handleColorChange = (color, event) => {
     console.log('called')
     this.setState({
@@ -61,13 +70,16 @@ class App extends React.Component {
         <header>
           <h1>Light Control</h1>
         </header>
-
         <form>
+          <DropDown routines={this.state.allRoutines} changeName={this.changeName} />
+          {
+            this.state.allRoutines.length > 1 &&
+            <p>{this.state.allRoutines.find(routine => routine.name === this.state.routineSettings.routineName).description}</p>
+          }
           <SketchPicker
             color={this.state.routineSettings.color}
             onChangeComplete={this.handleColorChange}
           />
-          <DropDown />
           <Range />
         </form>
       </main>
