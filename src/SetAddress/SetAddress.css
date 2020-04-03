@@ -15,7 +15,9 @@
 }
 
 .set-address input {
-  width: 90%;
+  width: 75%;
+  max-width: 400px;
+  text-align: center;
   box-sizing: border-box;
   padding: 10px;
   margin: 20px;
@@ -25,4 +27,8 @@
 
 .set-address label {
   margin-top: 20px;
+}
+
+.set-address .button-wrapper * {
+  margin: 0 auto;
 }
