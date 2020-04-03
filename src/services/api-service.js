@@ -1,4 +1,4 @@
-import { getAddress } from './services/local-storage-service';
+import { getAddress } from './local-storage-service';
 
 export function getRoutine() {
 }
