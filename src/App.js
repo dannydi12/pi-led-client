@@ -3,8 +3,8 @@ import { SketchPicker } from 'react-color';
 import DropDown from './DropDown/DropDown';
 import { getRoutines, setRoutine, stopRoutine } from './services/api-service';
 import { addressIsSet } from './services/local-storage-service';
-import './App.css';
 import SetAddress from './SetAddress/SetAddress';
+import './App.css';
 
 class App extends React.Component {
 
@@ -73,7 +73,7 @@ class App extends React.Component {
           b: color.rgb.b
         }
       }
-    })
+    }, () => setRoutine(this.state.routineSettings))
   };
 
   handleSettingChange = (setting, value) => {
@@ -88,9 +88,6 @@ class App extends React.Component {
   render() {
     return (
       <main>
-        <header>
-          <h1>Light Control</h1>
-        </header>
         <form onSubmit={(e) => {
           e.preventDefault();
           setRoutine(this.state.routineSettings)
@@ -107,18 +104,22 @@ class App extends React.Component {
               onChangeComplete={this.handleColorChange}
             />
           }
-          {
-            this.state.allRoutines.length > 1 && this.getCurrentRoutine().customOptions.find(option => option === 'delay') &&
-            <input type="range" min="1" max="5000" defaultValue={1000} onChange={(e) => this.handleSettingChange('delay', e.target.value)} className="slider" id="delay" />
-          }
-          {
-            this.state.allRoutines.length > 1 && this.getCurrentRoutine().customOptions.find(option => option === 'brightness') &&
-            <input type="range" min="1" max="255" defaultValue={200} onChange={(e) => this.handleSettingChange('brightness', e.target.value)} className="slider" id="brightness" />
+          {this.state.allRoutines.length > 1 &&
+            <div className='slider-container'>
+              {
+                this.getCurrentRoutine().customOptions.find(option => option === 'delay') &&
+                <input type="range" min="1" max="1000" defaultValue={1000} onChange={(e) => this.handleSettingChange('delay', e.target.value)} className="slider" id="delay" />
+              }
+              {
+                this.getCurrentRoutine().customOptions.find(option => option === 'brightness') &&
+                <input type="range" min="1" max="255" defaultValue={200} onChange={(e) => this.handleSettingChange('brightness', e.target.value)} className="slider" id="brightness" />
+              }
+            </div>
           }
           <button type='submit'>Start</button>
           <button type='button' onClick={stopRoutine}>Stop</button>
         </form>
-        {this.state.showAddressModal && <SetAddress toggleAddressModal={this.toggleAddressModal} populateRoutines={this.populateRoutines}/>}
+        {this.state.showAddressModal && <SetAddress toggleAddressModal={this.toggleAddressModal} populateRoutines={this.populateRoutines} />}
       </main>
     );
   }
