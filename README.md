@@ -1,68 +1,69 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Raspberry Pi LED Client
 
-In the project directory, you can run:
+[![CodeFactor](https://www.codefactor.io/repository/github/dannydi12/pi-led-client/badge)](https://www.codefactor.io/repository/github/dannydi12/pi-led-client)
 
-### `yarn start`
+Finally, a project that provides a turn-key solution for setting up remotely-controlled LEDs on a Raspberry Pi with Express. This project allows users to get up and running with WS281x LED strips while also providing a simple web server to act as a remote control.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Quick Start
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+A separate repository for the Express back end can be found [at this repo](https://github.com/dannydi12/pi-led-server).
 
-### `yarn test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+For one thing, you'll need a Raspberry Pi 3 or newer. You can find one on Amazon or anywhere else on the internet, so I won't add a link for now.
 
-### `yarn build`
+Make sure you have Node installed. If not, go to [Node's download page]([https://nodejs.org/en/](https://nodejs.org/en/)). 
+Or just run this to get the latest version of Node:
+```
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt install -y nodejs
+```
+Then, check node is working:
+```
+node --version
+```
+Also NPM:
+```
+npm --version
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Setup
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Installing
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the project: `git clone https://github.com/dannydi12/pi-led-client`
+2. Enter the directory with `cd pi-led-server` 
+3. Install with NPM: `npm i`
+4. Open the 'example.env' file with your favorite text editor and change the API key to something secure. I recommend using a [password generator]([https://passwordsgenerator.net/](https://passwordsgenerator.net/)) to make a strong key.
+5. Rename 'example.env' to '.env' with `mv example.env .env`
+6. Run `sudo npm i serve pm2 -g`
+7. Build the production folder with `npm run build` (should result in a new folder called 'build')
+8. Edit `webserver.sh` with the absolute path to your folder
+10. Start the deployment with `sudo pm2 start webserver.sh`
 
-### `yarn eject`
+That should be all that's needed to get everything installed. Even after rebooting your pi, this server should remain live,
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Note: the web server startup command requires `sudo` because it needs root privileges to access port 80.  There are much safer ways to do this but this should not be exposed to the outside world.**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Usage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Built With
 
-## Learn More
+* [rpi-ws281x-python](https://github.com/rpi-ws281x/rpi-ws281x-python) - For controlling/accessing the LEDs
+* Node
+* Python
+* Express
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Authors
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* **Daniel DiVenere** - *Initial work* - [Portfolio](https://imdan.io)
 
-### Code Splitting
+## Contributing
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+I'm always looking for ways to better my projects. Feel free to make a pull request or submit an issue.
 
-### Analyzing the Bundle Size
+## License
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
