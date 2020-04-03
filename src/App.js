@@ -1,7 +1,6 @@
 import React from 'react';
 import { SketchPicker } from 'react-color';
 import DropDown from './DropDown/DropDown';
-import Range from './Range/Range';
 import { getRoutines, setRoutine, stopRoutine } from './services/api-service';
 import { getAddress, addressIsSet } from './services/local-storage-service';
 import './App.css';
@@ -19,8 +18,8 @@ class App extends React.Component {
         b: 214,
       },
       delay: null,
-      brightness: null,
-    }
+      brightness: undefined,
+    },
   }
 
   componentDidMount() {
@@ -41,10 +40,15 @@ class App extends React.Component {
     })
   }
 
+  getCurrentRoutine = () => {
+    return this.state.allRoutines.find(routine => routine.name === this.state.routineSettings.routineName)
+  }
+
   changeName = (newName) => {
     this.setState({
       routineSettings: {
         ...this.state.routineSettings,
+        delay: null,
         routineName: newName
       }
     })
@@ -54,7 +58,6 @@ class App extends React.Component {
     this.setState({
       routineSettings: {
         ...this.state.routineSettings,
-        delay: null,
         color: {
           r: color.rgb.r,
           g: color.rgb.g,
@@ -63,6 +66,24 @@ class App extends React.Component {
       }
     })
   };
+
+  handleDelayChange = (delay) => {
+    this.setState({
+      routineSettings: {
+        ...this.state.routineSettings,
+        delay,
+      }
+    })
+  }
+
+  handleBrightnessChange = (brightness) => {
+    this.setState({
+      routineSettings: {
+        ...this.state.routineSettings,
+        brightness,
+      }
+    })
+  }
 
   render() {
     return (
@@ -74,13 +95,24 @@ class App extends React.Component {
           <DropDown routines={this.state.allRoutines} changeName={this.changeName} />
           {
             this.state.allRoutines.length > 1 &&
-            <p>{this.state.allRoutines.find(routine => routine.name === this.state.routineSettings.routineName).description}</p>
+            <p>{this.getCurrentRoutine().description}</p>
           }
-          <SketchPicker
-            color={this.state.routineSettings.color}
-            onChangeComplete={this.handleColorChange}
-          />
-          <Range />
+          {
+            this.state.allRoutines.length > 1 && this.getCurrentRoutine().customOptions.find(option => option === 'color') &&
+            <SketchPicker
+              color={this.state.routineSettings.color}
+              onChangeComplete={this.handleColorChange}
+            />
+          }
+          {
+            this.state.allRoutines.length > 1 && this.getCurrentRoutine().customOptions.find(option => option === 'delay') &&
+            <input type="range" min="1" max="10000" defaultValue={1000} onChange={(e) => this.handleDelayChange(e.target.value)} className="slider" id="delay" />
+          }
+          {
+            this.state.allRoutines.length > 1 && this.getCurrentRoutine().customOptions.find(option => option === 'brightness') &&
+            <input type="range" min="1" max="255" defaultValue={200} onChange={(e) => this.handleBrightnessChange(e.target.value)} className="slider" id="brightness" />
+          }
+
         </form>
       </main>
     );
