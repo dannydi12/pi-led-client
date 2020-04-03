@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './DropDown.css';
 
-function DropDown(props) {
-
+function DropDown(props) {  
   const options = props.routines.map(routine => {
     return <option key={routine.name} value={routine.name}>{routine.name}</option>
   })
@@ -12,6 +12,14 @@ function DropDown(props) {
       {options}
     </select>
   );
+}
+
+DropDown.propTypes = {
+  routines: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    customOptions: PropTypes.array.isRequired
+  })).isRequired
 }
 
 export default DropDown;
