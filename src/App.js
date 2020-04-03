@@ -1,28 +1,32 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import DropDown from './DropDown/DropDown';
 import Range from './Range/Range';
 import { getRoutine, setRoutine, stopRoutine } from './services/api-service';
 import { getAddress, setAddress, addressIsSet } from './services/local-storage-service';
 import './App.css';
 
-function App() {
+class App extends React.Component {
 
-  useEffect(() => {
-    getRoutine()
-  })
+  componentDidMount() {
+    if (!addressIsSet) {
+      // trigger modal
+    }
+  }
 
-  return (
-    <main>
-      <header>
-        <h1>Light Control</h1>
-      </header>
+  render() {
+    return (
+      <main>
+        <header>
+          <h1>Light Control</h1>
+        </header>
 
-      <form>
-        <DropDown />
-        <Range />
-      </form>
-    </main>
-  );
+        <form>
+          <DropDown />
+          <Range />
+        </form>
+      </main>
+    );
+  }
 }
 
 export default App;
