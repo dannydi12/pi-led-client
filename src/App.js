@@ -35,13 +35,12 @@ class App extends React.Component {
   }
 
   populateRoutines = () => {
-    getRoutines(this.addRoutines)
-  }
-
-  addRoutines = (allRoutines) => {
-    this.setState({
-      allRoutines
-    })
+    getRoutines()
+      .then(res => {
+        this.setState({
+          allRoutines: res
+        })
+      })
   }
 
   getCurrentRoutine = () => {

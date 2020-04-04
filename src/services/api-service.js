@@ -11,7 +11,7 @@ function objectToQueryString(obj) {
   return queries.filter(query => query !== null).join('&');
 }
 
-export function getRoutines(addToState) {
+export function getRoutines() {
   return fetch(`${getAddress()}/routines`, {
     method: 'GET',
     headers: {
@@ -24,7 +24,6 @@ export function getRoutines(addToState) {
       }
       return res.json()
     })
-    .then(res => addToState(res))
     .catch(err => {
       console.log(err);
     })
