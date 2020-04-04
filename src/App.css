@@ -36,6 +36,10 @@ main {
   max-width: 250px;
 }
 
+#controller .button-wrapper {
+  margin-top: 30px;
+}
+
 .settings-button {
   background-image: url('/images/settings.png');
   background-size: 25px;
