@@ -1,4 +1,5 @@
 
+
 # Raspberry Pi LED Client
 
 [![CodeFactor](https://www.codefactor.io/repository/github/dannydi12/pi-led-client/badge)](https://www.codefactor.io/repository/github/dannydi12/pi-led-client)
@@ -46,7 +47,15 @@ That should be all that's needed to get everything installed. Even after rebooti
 
 **Note: the web server startup command requires `sudo` because it needs root privileges to access port 80.  There are much safer ways to do this but this should not be exposed to the outside world.**
 
-To-do: add screenshots
+## Screenshots
+
+This React site makes it incredibly easy to quickly change the settings of the current running routine. It's as simple as using a remote control:
+
+![control each routine](screens/dashboard.PNG)
+
+The routines are fetched from the API server and can easily be chosen with a selector:
+
+![select different routines](screens/select.PNG)
 
 ## Built With
 
