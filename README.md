@@ -47,6 +47,10 @@ That should be all that's needed to get everything installed. Even after rebooti
 
 **Note: the web server startup command requires `sudo` because it needs root privileges to access port 80.  There are much safer ways to do this but this should not be exposed to the outside world.**
 
+### Usage
+
+Once everything is up and running, simply browse to your Pi's local IP and enter the URL to your API server. I recommend saving the site to your home screen for easy access. Have fun!
+
 ## Screenshots
 
 This React site makes it incredibly easy to quickly change the settings of the current running routine. It's as simple as using a remote control:
