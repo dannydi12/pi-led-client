@@ -29,7 +29,7 @@ export function getRoutines() {
     })
 }
 
-export function setRoutine(routine) {
+export function putRoutine(routine) {
   const settings = {
     name: encodeURI(routine.routineName),
     colorType: 'rgb',

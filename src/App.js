@@ -1,7 +1,7 @@
 import React from 'react';
 import { SketchPicker } from 'react-color';
 import DropDown from './DropDown/DropDown';
-import { getRoutines, setRoutine, stopRoutine } from './services/api-service';
+import { getRoutines, putRoutine, stopRoutine } from './services/api-service';
 import { addressIsSet } from './services/local-storage-service';
 import SetAddress from './SetAddress/SetAddress';
 import './App.css';
@@ -60,7 +60,7 @@ class App extends React.Component {
         delay: null,
         routineName: newName
       }
-    }, () => setRoutine(this.state.routineSettings))
+    }, () => putRoutine(this.state.routineSettings))
   }
 
   handleColorChange = (color, event) => {
@@ -73,7 +73,7 @@ class App extends React.Component {
           b: color.rgb.b
         }
       }
-    }, () => setRoutine(this.state.routineSettings))
+    }, () => putRoutine(this.state.routineSettings))
   };
 
   handleSettingChange = (setting, value) => {
@@ -82,7 +82,7 @@ class App extends React.Component {
         ...this.state.routineSettings,
         [setting]: value,
       }
-    }, () => setRoutine(this.state.routineSettings))
+    }, () => putRoutine(this.state.routineSettings))
   }
 
   render() {
@@ -90,7 +90,7 @@ class App extends React.Component {
       <main>
         <form id='controller' onSubmit={(e) => {
           e.preventDefault();
-          setRoutine(this.state.routineSettings)
+          putRoutine(this.state.routineSettings)
         }}>
           <DropDown routines={this.state.allRoutines} changeName={this.changeName} />
           {
