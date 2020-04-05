@@ -1,13 +1,13 @@
 export function setAddress(address) {
-  return localStorage.setItem('address', address)
+  return localStorage.setItem('address', address);
 }
 
 export function getAddress() {
-  return localStorage.getItem('address')
+  return localStorage.getItem('address');
 }
 
 export function addressIsSet() {
-  if(!getAddress()) {
+  if (!getAddress()) {
     return false;
   }
   return true;
