@@ -12,7 +12,7 @@ A separate repository for the Express back end can be found [at this repo](https
 
 ### Prerequisites
 
-For one thing, you'll need a Raspberry Pi 3 or newer. You can find one on Amazon or anywhere else on the internet, so I won't add a link for now.
+For one thing, you'll need a Raspberry Pi 3 or newer and a WS281x LED strip.
 
 Make sure you have Node installed. If not, go to [Node's download page]([https://nodejs.org/en/](https://nodejs.org/en/)). 
 Or just run this to get the latest version of Node:
